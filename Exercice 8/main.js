@@ -1,6 +1,8 @@
+// EXEMPLE TYPE
+
 class hero{
     constructor(name, attack, pv){ // Paramètres de la classe
-        this.name = name  // OBLIGER DE METTRE CETTE LIGNE POUR CHAQUE CONSTRUCTEUR
+        this.name = name  // OBLIGER DE METTRE CE GENRE DE LIGNE POUR CHAQUE PARAMETRE
         this.attack = attack
         this.pv = pv
     }
@@ -22,7 +24,7 @@ class monsters{
 }
 
 
-let Reinor = new hero("Reinor", 25, 300) //Pour créer une nouvelle instance
+let Reinor = new hero("Reinor", 25, 300) // Pour créer une nouvelle instance
 let gnome = new monsters(100, 20)
 
 if (gnome.pv -= Reinor.attack <= 0){
@@ -31,12 +33,13 @@ if (gnome.pv -= Reinor.attack <= 0){
 
 
 
-//TOUJOURS TESTER PETIT A PETIT
+
+// ERXERCICE 8
 
 class pokemon{ // luck est une valeur entre 0 et 1. On en définit une par défaut, puis on en génère une nouvelle à l'aide de Math.random()
     constructor(name, attack, defense, hp, luck){ // qu'on affectera a une variable réutilisable (tout ça dans la fonction isLucky)
         // isLucky compare luck à la valeur randomisée générée avec Math.random
-        this.name = name // si luck < random.value ---> True (donc le Pokémon attaque)
+        this.name = name // si luck > random.value ---> True (donc le Pokémon attaque)
         this.attack = attack // sinon ---> False (donc le Pokémon skip son tour)
         this.defense = defense
         this.hp = hp
