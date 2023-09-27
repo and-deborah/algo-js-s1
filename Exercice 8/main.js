@@ -44,25 +44,39 @@ class pokemon{ // luck est une valeur entre 0 et 1. On en définit une par défa
     }
 }
 let Flambusard = new pokemon("Flambusard", 30, 20, 300, 0.5)
-let Absol = new pokemon("Absol", 27, 23, 300, 0.6)
-let dmg = 0
+let Absol = new pokemon("Absol", 27, 24, 300, 0.6)
+let damage = 0
+
+console.log(Flambusard)
+console.log(Absol)
+console.log(damage)
 
 
-function attackPokemon(hp, attack, defense, dmg){
-    hp = this.hp - this.attack
-    dmg = this.attack - this.defense
-    // return quoi au juste? check ça plus tard
+//La fonction ci-dessous ne marche pas
+function attackPokemon(hp,attack, defense, damage){
+    this.hp -= this.attack
+    damage = this.attack - this.defense
+    return damage
 }
+
 
 
 while (Flambusard.hp > 0 || Absol.hp > 0) {
-    attackPokemon(Absol.hp, Flambusard.attack)
-    console.log(Absol.name + " " + "a subi" + " "+ dmg + " " + "dégâts, " + "il lui reste" + " " + Absol.hp + " " + "PV")
-    if (Absol.hp < 0){
+    attackPokemon(Absol.hp, Flambusard.attack, Absol.defense, damage)
+    console.log(Absol.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Absol.hp + " " + "PV")
+    if (Absol.hp <= 0){
+        console.log("Absol ne peut plus continuer le combat")
         break
-    } else {
-        attackPokemon(Flambusard.hp, Absol.attack)
-        console.log(Flambusard.name + " " + "a subi" + " "+ dmg + " " + "dégâts, " + "il lui reste" + " " + Flambusard.hp + " " + "PV")
+        }
+    attackPokemon(Flambusard.hp, Absol.attack, Flambusard.defense, damage)
+    console.log(Flambusard.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Flambusard.hp + " " + "PV")
+    if (Flambusard.hp <= 0){
+        console.log("Flambusard ne peut plus continuer le combat")
+        break
+        }
+    else{
+        continue  // cette ligne est-elle vraiment nécéssaire? C'est une boucle While après tout
     }
 }
+
 
