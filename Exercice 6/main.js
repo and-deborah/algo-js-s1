@@ -19,7 +19,13 @@ names.push("Vincent")
 names.push("Paul")
 names.push("Arthur")
 
-for(let i = 0; i < names.length; i++) {
-    names[i] += "va à la pêche"
-    console.log(i)
+for(let i = 0; i < names.length; i++){
+    names[i] += " va à la pêche"
+    console.log(names[i])
 }
+
+
+names.forEach((nom) => console.log(nom + " va à la pêche"))
+/* ou encore.forEach(nom =>{
+    nom += " et au tennis"
+})  */
