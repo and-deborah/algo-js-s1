@@ -1,6 +1,6 @@
 // EXEMPLE TYPE
 
-class hero{
+/*class hero{
     constructor(name, attack, pv){ // Paramètres de la classe
         this.name = name  // OBLIGER DE METTRE CE GENRE DE LIGNE POUR CHAQUE PARAMETRE
         this.attack = attack
@@ -30,7 +30,7 @@ let gnome = new monsters(100, 20)
 if (gnome.pv -= Reinor.attack <= 0){
     console.log("Le gnome est mort.")
 }
-
+*/
 
 
 
@@ -47,13 +47,19 @@ class pokemon{
 }
 
 let Flambusard = new pokemon("Flambusard", 36, 22, 100, 0.5)
-let Absol = new pokemon("Absol", 32, 25, 100, 0.6)
+let Absol = new pokemon("Absol", 32, 25, 100, 0.5)
 
 
 
-console.log(Flambusard)
-console.log(Absol)
+//console.log(Flambusard)
+//console.log(Absol)
 
+
+
+
+
+
+// Fonctions
 
 function attackPokemon(pokemonOne, pokemonTwo){
     damage = pokemonOne.attack - pokemonTwo.defense
@@ -62,27 +68,37 @@ function attackPokemon(pokemonOne, pokemonTwo){
 }
 
 
-/*function isLucky(pokemonOne, pokemonTwo){
-    randomLuck = Math.random()
-    if pokemonOne.luck > randomLuck{
-        attackPokemon(pokemonOne, pokemonTwo)
+function isLucky(pokeOne, pokeTwo){
+    if (pokeOne.luck > Math.random()){
+        attackPokemon(pokeOne, pokeTwo)
+        console.log(pokeOne.name + " " + "attaque" + " " + pokeTwo.name + " !")
+        if (pokeTwo.hp < 0){
+            console.log(pokeTwo.name + " " + "a subi" + " "+ damage + " " + "dégâts, il lui reste 0 PV")
+        }
+        else{
+            console.log(pokeTwo.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + pokeTwo.hp + " " + "PV")
+        }
     }
-}*/
+    else{
+        console.log(pokeOne.name + " " + "a manqué son coup !")
+    }
+}
 
 
+
+
+
+
+// Simulation d'un combat
 
 while (Flambusard.hp > 0 || Absol.hp > 0) {
-    attackPokemon(Flambusard, Absol)
-    console.log("Flambusard attaque Absol !")
-    console.log(Absol.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Absol.hp + " " + "PV")
+    isLucky(Flambusard, Absol)
     if (Absol.hp <= 0){
         console.log("Absol ne peut plus continuer le combat !")
         console.log("Flambusard est le vainqueur de ce duel !")
         break
         }
-    attackPokemon(Absol, Flambusard)
-    console.log("Absol attaque Flambusard !")
-    console.log(Flambusard.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Flambusard.hp + " " + "PV")
+    isLucky(Absol, Flambusard)
     if (Flambusard.hp <= 0){
         console.log("Flambusard ne peut plus continuer le combat !")
         console.log("Absol est le vainqueur de ce duel !")
