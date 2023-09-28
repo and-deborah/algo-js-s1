@@ -34,52 +34,62 @@ if (gnome.pv -= Reinor.attack <= 0){
 
 
 
-// ERXERCICE 8
+// EXERCICE 8
 
-class pokemon{ // luck est une valeur entre 0 et 1. On en définit une par défaut, puis on en génère une nouvelle à l'aide de Math.random()
-    constructor(name, attack, defense, hp, luck){ // qu'on affectera a une variable réutilisable (tout ça dans la fonction isLucky)
-        // isLucky compare luck à la valeur randomisée générée avec Math.random
-        this.name = name // si luck > random.value ---> True (donc le Pokémon attaque)
-        this.attack = attack // sinon ---> False (donc le Pokémon skip son tour)
+class pokemon{ 
+    constructor(name, attack, defense, hp, luck){ 
+        this.name = name
+        this.attack = attack
         this.defense = defense
         this.hp = hp
         this.luck = luck
     }
 }
-let Flambusard = new pokemon("Flambusard", 30, 20, 300, 0.5)
-let Absol = new pokemon("Absol", 27, 24, 300, 0.6)
-let damage = 0
+
+let Flambusard = new pokemon("Flambusard", 36, 22, 100, 0.5)
+let Absol = new pokemon("Absol", 32, 25, 100, 0.6)
+
+
 
 console.log(Flambusard)
 console.log(Absol)
-console.log(damage)
 
 
-//La fonction ci-dessous ne marche pas
-function attackPokemon(hp,attack, defense, damage){
-    this.hp -= this.attack
-    damage = this.attack - this.defense
+function attackPokemon(pokemonOne, pokemonTwo){
+    damage = pokemonOne.attack - pokemonTwo.defense
+    pokemonTwo.hp -= damage
     return damage
 }
 
 
+/*function isLucky(pokemonOne, pokemonTwo){
+    randomLuck = Math.random()
+    if pokemonOne.luck > randomLuck{
+        attackPokemon(pokemonOne, pokemonTwo)
+    }
+}*/
+
+
 
 while (Flambusard.hp > 0 || Absol.hp > 0) {
-    attackPokemon(Absol.hp, Flambusard.attack, Absol.defense, damage)
+    attackPokemon(Flambusard, Absol)
+    console.log("Flambusard attaque Absol !")
     console.log(Absol.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Absol.hp + " " + "PV")
     if (Absol.hp <= 0){
-        console.log("Absol ne peut plus continuer le combat")
+        console.log("Absol ne peut plus continuer le combat !")
+        console.log("Flambusard est le vainqueur de ce duel !")
         break
         }
-    attackPokemon(Flambusard.hp, Absol.attack, Flambusard.defense, damage)
+    attackPokemon(Absol, Flambusard)
+    console.log("Absol attaque Flambusard !")
     console.log(Flambusard.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + Flambusard.hp + " " + "PV")
     if (Flambusard.hp <= 0){
-        console.log("Flambusard ne peut plus continuer le combat")
+        console.log("Flambusard ne peut plus continuer le combat !")
+        console.log("Absol est le vainqueur de ce duel !")
         break
         }
     else{
-        continue  // cette ligne est-elle vraiment nécéssaire? C'est une boucle While après tout
+        continue
     }
 }
-
 
