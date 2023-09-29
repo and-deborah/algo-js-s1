@@ -59,7 +59,9 @@ let Absol = new pokemon("Absol", 32, 25, 100, 0.5)
 
 
 
-// Fonctions
+// Fonctions, elles auraient pu être directement mises à l'intérieur de la class pokemon (comme ça pas besoin de préciser "function")
+
+
 
 function attackPokemon(pokemonOne, pokemonTwo){
     damage = pokemonOne.attack - pokemonTwo.defense
@@ -67,13 +69,19 @@ function attackPokemon(pokemonOne, pokemonTwo){
     return damage
 }
 
+/* Autre manière d'écrire cette fonction :
+ attackPokemon(pokemon){
+    let damage = this.attack- pokemon.defense
+    pokemon.hp -= damage
+} */
+
 
 function isLucky(pokeOne, pokeTwo){
     if (pokeOne.luck > Math.random()){
         attackPokemon(pokeOne, pokeTwo)
         console.log(pokeOne.name + " " + "attaque" + " " + pokeTwo.name + " !")
         if (pokeTwo.hp < 0){
-            console.log(pokeTwo.name + " " + "a subi" + " "+ damage + " " + "dégâts, il lui reste 0 PV")
+            console.log(pokeTwo.name + " " + "a subi" + " "+ damage + " " + "dégâts, il lui reste 0 PV")  // Je voulais pas que la console affiche un entier négatif
         }
         else{
             console.log(pokeTwo.name + " " + "a subi" + " "+ damage + " " + "dégâts, " + "il lui reste" + " " + pokeTwo.hp + " " + "PV")
@@ -84,7 +92,16 @@ function isLucky(pokeOne, pokeTwo){
     }
 }
 
+/* Autre manière d'écrire cette fonction :
+isLucky(){
+    if(Math.random < this.luck){
+        return True
+    } else {
+        return False
+    }
+}
 
+OU ENCORE : return Math.random() < this.luck   */
 
 
 
@@ -109,3 +126,15 @@ while (Flambusard.hp > 0 || Absol.hp > 0) {
     }
 }
 
+/* Autre version :
+while(Flambusard.hp >= 0 || Absol.hp >= 0){
+
+    Flambusard.attackPokemon(Absol)
+        if(Absol.hp <= 0){
+            console.log(Absol.name + " est mort.")
+        }
+    Absol.attackPokemon(Flambusard)
+        if(Flambusard.hp <= 0){
+            console.log(Flambusard.name + " est mort.")
+}
+*/
