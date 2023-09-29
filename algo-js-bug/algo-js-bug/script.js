@@ -11,12 +11,12 @@ function countCharacter(value) {  // faute ici
 }
 
 users.forEach(user => { 
-    if (countCharacter(users) > 5) {  // faute ici
+    if (countCharacter(user) > 5) {  // fautes ici
         console.log("c'est un prénom long de plus de 5 lettres.")  // faute ici
     } else {
         console.log("ce n'est pas du tout un prénom long.")
     }
-})  // faute ici
+})
 
 
 
