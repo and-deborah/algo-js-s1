@@ -21,7 +21,7 @@ class character {
                 taxiSwap += 1
                 if (this.sanity === 0){
                     console.log(this.name + " n'en peut plus d'entendre Anissa. " + this.name + " finit par exploser au bout de " + trafficLights + " feux.")
-                    break
+                    break  // "break" ne marche que dans une boucle WHILE
                 } else{
                     console.log(this.name + " n'apprécie pas " + currentMusic +" , il change de taxi...")
                 }
