@@ -3,10 +3,18 @@ nameList = [
     "Hermit",
     "Thinker",
     "Noob",
-    "Speedrunner",
-    "Cheater",
     "Pro",
+    "Veteran",
+    "Speedrunner",
+    "Tryharder",
+    "Troller",
+    "Hacker",
+    "Teamer",
+    "Toxic",
     "Crybaby",
+    "Simp",
+    "Mod",
+    "Admin",
     "God"]
 
 
@@ -39,9 +47,9 @@ class survivor {
 
     dying(survivorsList, victimsList){
         if (this.ripRate > Math.random()){
-            survivorsList.splice(indexOf(this.name), 1)
             victimsList.push(this.name)
             console.log(this.name + " est mort sous l'attaque de " + killer.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
         }
     }
 
@@ -58,9 +66,9 @@ class survivor {
     lastStraw(survivorsList, victimsList){
         if (this.atkButRip > Math.random()){
             killer.hp -= 15
-            survivorsList.splice(indexOf(this.name), 1)
             victimsList.push(this.name)
             console.log(this.name + " a utilisé ses dernières forces pour infliger 15 points de dégâts à " + killer.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
         }
     }
 
@@ -92,10 +100,39 @@ victimActions = [  // COMMENT JE STOCKE MES FONCTIONS DANS UNE LISTEEEEEEE ?????
     lastStraw(survivorsList, victimsList)]
 
 
-while (killer.hp > 0 || survivorList != []) {
+/*var victimActions = {
+    dying : function() {
+        if (this.ripRate > Math.random()){
+            victimsList.push(this.name)
+            console.log(this.name + " est mort sous l'attaque de " + killer.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
+        }
+    },
+
+    dodge : function(){
+        if (this.atkRate > Math.random()){
+            killer.hp -= 10
+            console.log(this.name + " esquive l'assaut de " + killer.name + " et lui inflige 10 dégâts en retour!")
+        }
+    },
+
+    lastStraw : function(){
+        if (this.atkButRip > Math.random()){
+            killer.hp -= 15
+            victimsList.push(this.name)
+            console.log(this.name + " a utilisé ses dernières forces pour infliger 15 points de dégâts à " + killer.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
+        }
+    }
+}
+*/
+
+
+
+while (killer.hp > 0 || survivorsList != []) {
     victim = survivorsList[(Math.floor(Math.random() * survivorsList.length))]  // Jason choisit sa prochaine victime (vivante bien sûr)
     console.log(killer.name + " attaque " + victim + "!")
-    victimActions[(Math.floor(Math.random() * victimActions.length))]   // déclenche une attaque contre la victime à l'aide de la liste victimActions !!!!!!!!!! A MMODIFIERRRRRR!!!!!!!!!!!!
+    victimActions[(Math.floor(Math.random() * victimActions.length))]   // déclenche une attaque contre la victime à l'aide de la liste victimActions !!!!!!!!!! A MODIFIERRRRRR!!!!!!!!!!!!
     if (killer.hp <= 0 && survivorsList != []) {
         console.log("La team de choc a réussi à tuer " + killer.name + "! Mais prenons le temps d'appuyer sur F pour les membres qui se sont sacrifiés pour la bonne cause : " + victimsList)
         break
