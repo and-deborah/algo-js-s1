@@ -1,6 +1,24 @@
-nameList = [Nerd, Insomniac, Thinker, Noob, Speedrunner, Cheater, Pro, Crybaby, Tanker, God]
-deadlyAttack = [0.001, 0.5, 0.8, 0.666, 0.25]
+nameList = [
+    "Nerd",
+    "Hermit",
+    "Thinker",
+    "Noob",
+    "Speedrunner",
+    "Cheater",
+    "Pro",
+    "Crybaby",
+    "God"]
 
+
+deadlyAttack = [
+    0.001,
+    0.5,
+    0.8,
+    0.666,
+    0.25]
+
+
+victimsList = []
 
 
 class killer {
@@ -19,9 +37,10 @@ class survivor {
     }
 
 
-    dying(survivorList){
+    dying(survivorsList, victimsList){
         if (this.ripRate > Math.random()){
-            survivorList.splice(indexOf(this.name), 1)
+            survivorsList.splice(indexOf(this.name), 1)
+            victimsList.push(this.name)
             console.log(this.name + " est mort sous l'attaque de " + killer.name + ".")
         }
     }
@@ -36,10 +55,11 @@ class survivor {
 
 
 
-    lastStraw(survivorList){
+    lastStraw(survivorsList, victimsList){
         if (this.atkButRip > Math.random()){
             killer.hp -= 15
-            survivorList.splice(indexOf(this.name), 1)
+            survivorsList.splice(indexOf(this.name), 1)
+            victimsList.push(this.name)
             console.log(this.name + " a utilisé ses dernières forces pour infliger 15 points de dégâts à " + killer.name + ".")
         }
     }
@@ -47,37 +67,7 @@ class survivor {
 }
 
 
-
-victimActions = [dying(survivorList), dodge(), lastStraw(survivorList)]
-
-victimActions[(Math.floor(Math.random() * victimActions.length))]
-
-
-
-/* POUR CODER LES ATTAQUES DE JASON :
-FAIRE UN PICK RANDOM SUR L'UN DES SURVIVANTS PRESENTS DANS LA LISTE "survivorList"
-La ligne de code en question :  victim = survivorList[(Math.floor(Math.random() * survivorList.length))]
-
-
-
-while killer.hp > 0 || survivorList != [] {
-    victim = survivorList[(Math.floor(Math.random() * survivorList.length))]
-    console.log(killer.name + " attaque " + victim + "!")
-    victimActions[(Math.floor(Math.random() * victimActions.length))]   # déclenche une attaque contre la victime à l'aide de la liste victimActions 
-    
-}
-
-*/
-
-
-
-
-
-
-
-
 let jason = new killer("Jason", 100)
-
 
 let survivorOne = new survivor(nameList[(Math.floor(Math.random() * nameList.length))], 0.3, 0.5, deadlyAttack[(Math.floor(Math.random() * deadlyAttack.length))] )
 
@@ -89,4 +79,32 @@ let survivorFour = new survivor(nameList[(Math.floor(Math.random() * nameList.le
 
 let survivorFive = new survivor(nameList[(Math.floor(Math.random() * nameList.length))], 0.1, 0.3, deadlyAttack[(Math.floor(Math.random() * deadlyAttack.length))])
 
-survivorList = [survivorOne, survivorTwo, survivorThree, survivorFour, survivorFive]
+survivorsList = [
+    survivorOne,
+    survivorTwo,
+    survivorThree,
+    survivorFour,
+    survivorFive]
+
+victimActions = [  // COMMENT JE STOCKE MES FONCTIONS DANS UNE LISTEEEEEEE ???????????????
+    dying(survivorsList, victimsList),
+    dodge(),
+    lastStraw(survivorsList, victimsList)]
+
+
+while (killer.hp > 0 || survivorList != []) {
+    victim = survivorsList[(Math.floor(Math.random() * survivorsList.length))]  // Jason choisit sa prochaine victime (vivante bien sûr)
+    console.log(killer.name + " attaque " + victim + "!")
+    victimActions[(Math.floor(Math.random() * victimActions.length))]   // déclenche une attaque contre la victime à l'aide de la liste victimActions !!!!!!!!!! A MMODIFIERRRRRR!!!!!!!!!!!!
+    if (killer.hp <= 0 && survivorsList != []) {
+        console.log("La team de choc a réussi à tuer " + killer.name + "! Mais prenons le temps d'appuyer sur F pour les membres qui se sont sacrifiés pour la bonne cause : " + victimsList)
+        break
+    }
+    else if (killer. hp > 0 && survivorsList == []) {
+        console.log("La team n'a pas réussi à tuer " + killer.name + " et se sont fait complètement annihiler, laissant " + killer.name + " continuer sa cavale...")
+        break
+    }
+    else{
+        continue
+    }
+}
