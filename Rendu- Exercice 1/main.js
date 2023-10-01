@@ -41,4 +41,7 @@ class character {
 
 let john = new character("John", 10)
 
+console.log(john)
+console.log("Liste de musiques dans cet exercice : " + playlist)
+
 john.journey(playlist)
