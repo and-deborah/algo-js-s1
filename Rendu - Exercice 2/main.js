@@ -1,4 +1,4 @@
-nameList = [
+const nameList = [
     "Nerd",
     "Hermit",
     "Thinker",
@@ -7,9 +7,11 @@ nameList = [
     "Veteran",
     "Speedrunner",
     "Tryharder",
+    "Victim",
     "Troller",
     "Hacker",
     "Teamer",
+    "Runner",
     "Toxic",
     "Crybaby",
     "Simp",
@@ -18,7 +20,7 @@ nameList = [
     "God"]
 
 
-deadlyAttack = [
+const deadlyAttack = [
     0.7,
     0.5,
     0.8,
@@ -26,7 +28,9 @@ deadlyAttack = [
     0.25]
 
 
-victimsList = []
+let victimsList = []
+
+const nextAction = ["dying", "dodge", "lastStraw"]
 
 
 class killer {
@@ -43,10 +47,43 @@ class survivor {
         this.atkRate = atkRate
         this.atkButRip = atkButRip
     }
+
+
+    /*dying(villain, survivorsList, victimsList){
+        randomOne = Math.random()
+        if (this.ripRate > randomOne){
+            victimsList.push(this.name)
+            console.log(hero.name + " est mort sous l'attaque de " + villain.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
+        }
+    }
+    
+    
+    dodge(villain){
+        randomTwo = Math.random()
+        if (this.atkRate > randomTwo){
+            villain.hp -= 10
+            console.log(this.name + " esquive l'assaut de " + villain.name + " et lui inflige 10 dégâts en retour!")
+        }
+    }
+    
+    
+    
+    lastStraw(villain, survivorsList, victimsList){
+        randomThree = Math.random()
+        if (this.atkButRip > randomThree){
+            villain.hp -= 15
+            victimsList.push(this.name)
+            console.log(this.name + " a utilisé ses dernières forces pour infliger 15 points de dégâts à " + villain.name + ".")
+            survivorsList.splice(indexOf(this.name), 1)
+        }
+    }
+    */
 }
 
 
 // ---> Hors de la classe survivor (j'y arrivais pas sans, désolé)
+
 
 function dying(hero, villain, survivorsList, victimsList){
     randomOne = Math.random()
@@ -91,28 +128,36 @@ let survivorFour = new survivor(nameList[(Math.floor(Math.random() * nameList.le
 
 let survivorFive = new survivor(nameList[(Math.floor(Math.random() * nameList.length))], 0.1, 0.3, deadlyAttack[(Math.floor(Math.random() * deadlyAttack.length))])
 
-survivorsList = [
+let survivorsList = [
     survivorOne.name,
     survivorTwo.name,
     survivorThree.name,
     survivorFour.name,
     survivorFive.name]
 
-
-// Ci-dessous, les lignes qui font tout malfonctionner
-victimActions = [
-    dying(survivor.name, jason),
-    dodge(survivor.name, jason),
-    lastStraw(survivor.name, jason)]
-
-
+ 
 console.log("Notre team de choc est composée de " + survivorsList)
 
 
+/* Je laisse ça en commentaire, ça génère une boucle infinie
+
 while (jason.hp > 0 || survivorsList != []) {
-    victim = survivorsList[(Math.floor(Math.random() * survivorsList.length))] // on choisit une victime vivante
-    console.log(jason.name + " attaque " + victim + "!")
-    victimActions[(Math.floor(Math.random() * victimActions.length))]  // LIGNE PROBLEMATIQUE
+    victim = survivorsList[(Math.floor(Math.random() * survivorsList.length))]
+
+    console.log(jason.name + " attaque " + victim + "!")  // Cette ligne est répétée sans cesse, ce qui va crash le navigateur
+
+    action = nextAction[(Math.floor(Math.random() * nextAction.length))]
+    if (action === "dying"){
+        dying(victim, jason)
+    }
+    else if (action === "dodge"){
+        dodge(victim, jason)
+    }
+    else{
+        lastStraw(victim, jason)
+    }
+
+    // ce que la boucle n'affichera jamais :
     if (jason.hp <= 0 && survivorsList != []) {
         console.log("La team de choc a réussi à tuer " + jason.name + "! Mais prenons le temps d'appuyer sur F pour les membres qui se sont sacrifiés pour la bonne cause : " + victimsList)
         break
@@ -125,11 +170,11 @@ while (jason.hp > 0 || survivorsList != []) {
         continue
     }
 }
+*/
 
 
 
-
-// Toutes les tentatives ratées, dans l'espoir de randomiser le choix de fonction
+// J'avais aussi essayé d'autres manières pour pick une fonction random, rien n'a marché
 
 /* "Stockage" de fonctions dans un array (n'a jamais été design pour fonctionner avec une telle syntaxe)
 
@@ -137,7 +182,8 @@ victimActions = [
     dying(),
     dodge()),
     lastStraw()]
-*/
+
+pour ensuite appliquer : victimActions[(Math.floor(Math.random() * victimActions.length))]
 
 
 /* J'avais aussi essayé cette technique de "stockage" recommandée par des utilisateurs de StackOverflow, mais même ça j'ai raté
